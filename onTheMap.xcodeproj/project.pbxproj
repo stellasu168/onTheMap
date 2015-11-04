@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55326E201BE9721D00DC6348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55326E1F1BE9721D00DC6348 /* MapKit.framework */; };
 		554BFA811BE6BBC40020E793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BFA801BE6BBC40020E793 /* AppDelegate.swift */; };
-		554BFA831BE6BBC40020E793 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BFA821BE6BBC40020E793 /* ViewController.swift */; };
+		554BFA831BE6BBC40020E793 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BFA821BE6BBC40020E793 /* LoginScreenViewController.swift */; };
 		554BFA861BE6BBC40020E793 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554BFA841BE6BBC40020E793 /* Main.storyboard */; };
 		554BFA881BE6BBC40020E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 554BFA871BE6BBC40020E793 /* Assets.xcassets */; };
 		554BFA8B1BE6BBC40020E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554BFA891BE6BBC40020E793 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55326E1F1BE9721D00DC6348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		554BFA7D1BE6BBC40020E793 /* onTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		554BFA801BE6BBC40020E793 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		554BFA821BE6BBC40020E793 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		554BFA821BE6BBC40020E793 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		554BFA851BE6BBC40020E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		554BFA871BE6BBC40020E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		554BFA8A1BE6BBC40020E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -29,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55326E201BE9721D00DC6348 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +41,7 @@
 		554BFA741BE6BBC40020E793 = {
 			isa = PBXGroup;
 			children = (
+				55326E1F1BE9721D00DC6348 /* MapKit.framework */,
 				554BFA7F1BE6BBC40020E793 /* onTheMap */,
 				554BFA7E1BE6BBC40020E793 /* Products */,
 			);
@@ -55,7 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				554BFA801BE6BBC40020E793 /* AppDelegate.swift */,
-				554BFA821BE6BBC40020E793 /* ViewController.swift */,
+				554BFA821BE6BBC40020E793 /* LoginScreenViewController.swift */,
 				554BFA841BE6BBC40020E793 /* Main.storyboard */,
 				554BFA871BE6BBC40020E793 /* Assets.xcassets */,
 				554BFA891BE6BBC40020E793 /* LaunchScreen.storyboard */,
@@ -95,6 +99,11 @@
 				TargetAttributes = {
 					554BFA7C1BE6BBC40020E793 = {
 						CreatedOnToolsVersion = 7.0.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -134,7 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				554BFA831BE6BBC40020E793 /* ViewController.swift in Sources */,
+				554BFA831BE6BBC40020E793 /* LoginScreenViewController.swift in Sources */,
 				554BFA811BE6BBC40020E793 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +292,7 @@
 				554BFA911BE6BBC40020E793 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
