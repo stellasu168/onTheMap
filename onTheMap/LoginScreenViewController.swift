@@ -28,7 +28,7 @@ class LoginScreenViewController: UIViewController {
     }
 
 
-    @IBAction func login(sender: AnyObject) {
+    @IBAction func loginButtonTouch(sender: AnyObject) {
         
         // If both usename and password are not empty, do this ...
         
@@ -91,7 +91,7 @@ class LoginScreenViewController: UIViewController {
     }
     
     
-    @IBAction func signUp(sender: AnyObject) {
+    @IBAction func signUpButtonTouch(sender: AnyObject) {
         // Open Safari when Sign Up is clicked
         let url = NSURL(string: "https://www.udacity.com/account/auth#!/signup")
         UIApplication.sharedApplication().openURL(url!)
