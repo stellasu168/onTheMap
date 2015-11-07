@@ -15,6 +15,10 @@
 		554BFA8B1BE6BBC40020E793 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 554BFA891BE6BBC40020E793 /* LaunchScreen.storyboard */; };
 		5588FA8B1BEC6FB00054FA76 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5588FA8A1BEC6FB00054FA76 /* MapViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		5588FA901BECACDB0054FA76 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5588FA8F1BECACDB0054FA76 /* ListViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		5588FA921BEDD9C90054FA76 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5588FA911BEDD9C90054FA76 /* ParseClient.swift */; settings = {ASSET_TAGS = (); }; };
+		5588FA941BEDDA5D0054FA76 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5588FA931BEDDA5D0054FA76 /* StudentLocation.swift */; settings = {ASSET_TAGS = (); }; };
+		5588FA961BEDDB380054FA76 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5588FA951BEDDB380054FA76 /* ParseConstants.swift */; settings = {ASSET_TAGS = (); }; };
+		5588FA981BEE135A0054FA76 /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5588FA971BEE135A0054FA76 /* ParseConvenience.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		554BFA8C1BE6BBC40020E793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5588FA8A1BEC6FB00054FA76 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5588FA8F1BECACDB0054FA76 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		5588FA911BEDD9C90054FA76 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		5588FA931BEDDA5D0054FA76 /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		5588FA951BEDDB380054FA76 /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
+		5588FA971BEE135A0054FA76 /* ParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +110,10 @@
 		5588FA8E1BEC70440054FA76 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				5588FA911BEDD9C90054FA76 /* ParseClient.swift */,
+				5588FA931BEDDA5D0054FA76 /* StudentLocation.swift */,
+				5588FA951BEDDB380054FA76 /* ParseConstants.swift */,
+				5588FA971BEE135A0054FA76 /* ParseConvenience.swift */,
 			);
 			name = Clients;
 			sourceTree = "<group>";
@@ -181,10 +193,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5588FA941BEDDA5D0054FA76 /* StudentLocation.swift in Sources */,
+				5588FA981BEE135A0054FA76 /* ParseConvenience.swift in Sources */,
 				554BFA831BE6BBC40020E793 /* LoginScreenViewController.swift in Sources */,
+				5588FA921BEDD9C90054FA76 /* ParseClient.swift in Sources */,
 				5588FA8B1BEC6FB00054FA76 /* MapViewController.swift in Sources */,
 				5588FA901BECACDB0054FA76 /* ListViewController.swift in Sources */,
 				554BFA811BE6BBC40020E793 /* AppDelegate.swift in Sources */,
+				5588FA961BEDDB380054FA76 /* ParseConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

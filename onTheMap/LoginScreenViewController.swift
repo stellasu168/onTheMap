@@ -90,6 +90,10 @@ class LoginScreenViewController: UIViewController {
         
     }
     
+    func completeLogin(){
+        
+    }
+    
     
     @IBAction func signUpButtonTouch(sender: AnyObject) {
         // Open Safari when Sign Up is clicked
