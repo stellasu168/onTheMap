@@ -18,7 +18,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var locationsSet = false
     let emptyURLSubtitleText = "Student has not entered a URL"
     
-    //MARK --- Lifecycle
+    //MARK: Lifecycle
     
     override func viewDidLoad()
     {
@@ -36,14 +36,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     {
         super.viewWillAppear(animated)
         
-        // only set the pins if the locations has already been set
+        // Only set the pins if the locations has already been set
         if(locationsSet)
         {
             setPinsOnMap()
         }
     }
     
-    //MARK --- Tab Bar Buttons
+    //MARK: Tab Bar Buttons
     
 /*    func logout(sender: AnyObject)
     {
@@ -64,8 +64,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 */
 
-/*    func addPin(sender: AnyObject)
-    {
+/*    func addPin(sender: AnyObject) {
+    
         //Grab the information posting VC from Storyboard
         let object:AnyObject = storyboard!.instantiateViewControllerWithIdentifier("InfoPostingViewController")
         
@@ -75,26 +75,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         presentViewController(addPinVC, animated: true, completion: nil)
     }
 */
-    func refreshButtonClicked(sender: AnyObject)
-    {
+    
+  @IBAction func refreshButtonClicked(sender: AnyObject) {
         setLocations()
+        print("refresh button clicked")
     }
     
-    //MARK --- Map Behavior
+    //MARK: Map Behavior
     
-    func setLocations()
-    {
+    func setLocations() {
         ParseClient.sharedInstance().getStudentLocation() { result, error in
             
-            if let error = error
-            {
-                //make alert view show up with error from the Parse Client
+            if let error = error {
+                // Make alert view show up with error from the Parse Client
                 self.showAlertController("Parse Error", message: error.localizedDescription)
-            }
-            else
-            {
-                print("Successfully got student info!")
-                
+            } else {
+            
+                print("Successfully getting students info!")
                 ParseClient.sharedInstance().studentLocations = result!
                 self.locationsSet = true
                 self.setPinsOnMap()
@@ -102,28 +99,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func setPinsOnMap()
-    {
+    func setPinsOnMap() {
         dispatch_async(dispatch_get_main_queue(), {
             
-            //first remove annootations currently showing on the map view
+            // First remove annootations currently showing on the map view
             self.mapView.removeAnnotations(self.mapView.annotations)
             
             var annotations = [MKPointAnnotation]()
             
-            //get the needed data for every student
+            // Get the needed data for every student
             for student in ParseClient.sharedInstance().studentLocations
             {
                 let firstName = student.firstName
                 let lastName = student.lastName
                 
                 var mediaURL = ""
-                if(student.mediaURL != nil)
-                {
+                if(student.mediaURL != nil) {
                     mediaURL = student.mediaURL!
                 }
-                else
-                {
+                else {
                     mediaURL = self.emptyURLSubtitleText
                 }
                 
@@ -132,76 +126,64 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 let coordinates = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                 _ = student.uniqueKey
                 
-                //construct an anotation
+                // Construct an anotation
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinates
                 annotation.title = "\(firstName) \(lastName)"
                 annotation.subtitle = mediaURL
                 
-                //add each single annotation to the array
+                // Add each single annotation to the array
                 annotations.append(annotation)
             }
             
-            //add the annotations to the map veiw
+            // Add the annotations to the map veiw
             self.mapView.addAnnotations(annotations)
         })
     }
     
-    //MARK -- MKMapViewDelegate functions that allow you to click on URLs in the pin views on the map
+    //MARK: MKMapViewDelegate functions that allow you to click on URLs in the pin views on the map
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?
-    {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID) as? MKPinAnnotationView
         
-        if(pinView == nil)
-        {
+        if(pinView == nil) {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             pinView!.canShowCallout = true
             pinView!.pinTintColor = UIColor.redColor()
             pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
         }
-        else
-        {
+        else {
             pinView!.annotation = annotation
         }
         
         return pinView
     }
     
-    func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl)
-    {
-        if(annotationView.annotation!.subtitle! != emptyURLSubtitleText)
-        {
-            if(control == annotationView.rightCalloutAccessoryView)
-            {
+    func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if(annotationView.annotation!.subtitle! != emptyURLSubtitleText) {
+            if(control == annotationView.rightCalloutAccessoryView) {
                 let urlString = annotationView.annotation!.subtitle!
                 
-                if(verifyURL(urlString))
-                {
-                    //open the url if valid
+                if(verifyURL(urlString)) {
+                    // Open the url if it's valid
                     UIApplication.sharedApplication().openURL(NSURL(string: urlString!)!)
                 }
-                else
-                {
-                    //if the url is not valid, show an alert view
+                else {
+                    // If the url is not valid, show an alert view
                     showAlertController("URL Lookup Failed", message: "The provided URL is not valid.")
                 }
             }
         }
     }
     
-    //MARK --- Helpers
+    // MARK: Helpers
     
-    // learned how to verify urls from this website:
-    //http://stackoverflow.com/questions/28079123/how-to-check-validity-of-url-in-swift
-    func verifyURL(urlString: String?) -> Bool
-    {
-        if let urlString = urlString
-        {
-            if let url = NSURL(string: urlString)
-            {
+    func verifyURL(urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
                 return UIApplication.sharedApplication().canOpenURL(url)
             }
         }
@@ -209,12 +191,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return false
     }
  
-    func showAlertController(title: String, message: String)
-    {
+    // Error - click "OK" doesn't do anything
+    
+    func showAlertController(title: String, message: String) {
         dispatch_async(dispatch_get_main_queue(), {
-            
             print("failure string from client: \(message)")
-            
             let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
             alert.addAction(okAction)
@@ -222,11 +203,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             self.presentViewController(alert, animated: true, completion: nil)
         })
     }
-
-    
-    
-    
-  
 
     
 }

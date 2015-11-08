@@ -111,9 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				5588FA911BEDD9C90054FA76 /* ParseClient.swift */,
-				5588FA931BEDDA5D0054FA76 /* StudentLocation.swift */,
 				5588FA951BEDDB380054FA76 /* ParseConstants.swift */,
 				5588FA971BEE135A0054FA76 /* ParseConvenience.swift */,
+				5588FA931BEDDA5D0054FA76 /* StudentLocation.swift */,
 			);
 			name = Clients;
 			sourceTree = "<group>";

@@ -6,11 +6,12 @@
 //  Copyright © 2015 Million Stars, LLC. All rights reserved.
 //
 
-import UIKit
+// MARK: - StudentLocation
 
 struct StudentLocation {
     
-    // Properties
+    // MARK: Properties
+    
     var firstName = ""
     var lastName = ""
     var latitude: Double? = nil
@@ -22,11 +23,10 @@ struct StudentLocation {
     var createdAt = ""
     var updatedAt = ""
     
-    //construct a Student Location result from a dictionary
-    init() {}
+    // Construct a StudentLocation from a dictionary
+    //init() {}
     
-    init(dictionary: [String : AnyObject])
-    {
+    init(dictionary: [String : AnyObject]) {
         firstName = dictionary[ParseClient.JSONResponseKeys.FirstName] as! String
         lastName = dictionary[ParseClient.JSONResponseKeys.LastName] as! String
         latitude = dictionary[ParseClient.JSONResponseKeys.Latitude] as? Double
@@ -39,19 +39,15 @@ struct StudentLocation {
         updatedAt = dictionary[ParseClient.JSONResponseKeys.UpdatedAt] as! String
     }
     
-    //given an array of dictionaries, convert them to an array of Student Location result objects
-    static func locationsFromResults(results: [[String : AnyObject]]) -> [StudentLocation]
-    {
+    // Helper: Given an array of dictionaries, convert them to an array of StudentLocation objects
+    static func locationsFromResults(results: [[String : AnyObject]]) -> [StudentLocation] {
         var studentLocations = [StudentLocation]()
         
-        for result in results
-        {
+        for result in results {
             studentLocations.append(StudentLocation(dictionary: result))
         }
         
         return studentLocations
     }
 
-    
-    
 }

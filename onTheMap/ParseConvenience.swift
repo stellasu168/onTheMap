@@ -10,13 +10,15 @@
 import UIKit
 import Foundation
 
+// MARK: - PARSECLIENT (Convenient Resource Methods)
+
 extension ParseClient {
     
-    //MARK: Student Location Methods
+    // MARK: GET Convenience Methods
     
-    func getStudentLocation(completionHandler: (result: [StudentLocation]?, error: NSError?) -> Void)
-    {
-        //specify parameters and method
+    func getStudentLocation(completionHandler: (result: [StudentLocation]?, error: NSError?) -> Void) {
+        
+        // Specify parameters and method
         let parameters = [
             ParseClient.ParameterKeys.Limit: "\(100)",
             ParseClient.ParameterKeys.Skip: "\(0)",
@@ -25,34 +27,31 @@ extension ParseClient {
         
         let method : String = Methods.StudentLocation + "?"
         
-        //make the request
-        taskForGetMethod(method, parameters: parameters) { JSONResult, error in
+        // Make the request
+        taskForGetMethod(method, parameters: parameters) { (JSONResult, error) in
             
-            //send the desired values to the completion handler
-            if let error = error
-            {
+            // Send the desired value(s) to the completion handler
+            if let error = error {
+                print(error)
                 completionHandler(result: nil, error: error)
             }
-            else
-            {
-                if let results = JSONResult.valueForKey(ParseClient.JSONResponseKeys.Results) as? [[String : AnyObject]]
-                {
+            else {
+                if let results = JSONResult.valueForKey(ParseClient.JSONResponseKeys.Results) as? [[String : AnyObject]] {
                     let locations = StudentLocation.locationsFromResults(results)
-                    
                     completionHandler(result: locations, error: nil)
-                }
-                else
-                {
-                    print("Error parsing getStudentLocation -- couldn't find results string in json result")
+                } else {
+                    print("Error parsing getStudentLocation -- couldn't find results string in \(JSONResult)")
                     completionHandler(result: nil, error: NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not parse getStudentLocation"]))
                 }
             }
         }
     }
     
-    func postStudentLocation(location: StudentLocation, completionHandler: (result: String?, error: NSError?) -> Void)
+    // MARK: POST Convenience Methods
+    
+    func postToStudentLocation(location: StudentLocation, completionHandler: (result: String?, error: NSError?) -> Void)
     {
-        //specify method and HTTP body
+        // Specify method and HTTP body (if POST)
         let method : String = Methods.StudentLocation
         
         let jsonBody: [String : AnyObject] = [
@@ -65,35 +64,25 @@ extension ParseClient {
             ParseClient.JSONBodyKeys.Longitude: location.longitude! as Double
         ]
         
-        //make the request
-        taskForPostMethod(method, jsonBody: jsonBody) { JSONResult, error in
+        // Make the request
+        taskForPostMethod(method, jsonBody: jsonBody) { (JSONResult, error) in
             
-            //send the desired values to the completion handler
-            if let error = error
-            {
-                print("error from post method \(error)")
+            // Send the desired values to the completion handler
+            if let error = error {
+                print("Error from post method \(error)")
                 completionHandler(result: nil, error: error)
-            }
-            else
-            {
-                if let objectID = JSONResult.valueForKey(ParseClient.JSONResponseKeys.ObjectID) as? String
-                {
-                    if let createdAt = JSONResult.valueForKey(ParseClient.JSONResponseKeys.CreatedAt) as? String
-                    {
+            } else {
+                if let objectID = JSONResult.valueForKey(ParseClient.JSONResponseKeys.ObjectID) as? String {
+                    if let createdAt = JSONResult.valueForKey(ParseClient.JSONResponseKeys.CreatedAt) as? String {
                         print("Student Location Posted \(objectID) \(createdAt)")
-                        
                         completionHandler(result: objectID, error: nil)
+                    } else {
+                        print("Error parsing postToStudentLocation -- couldn't find createdAt in json result")
+                        completionHandler(result: nil, error: NSError(domain: "postToStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "couldn't find createdAt key in result"]))
                     }
-                    else
-                    {
-                        print("Error parsing postStudentLocation -- couldn't find createdAt in json result")
-                        completionHandler(result: nil, error: NSError(domain: "postStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "couldn't find createdAt key in result"]))
-                    }
-                }
-                else
-                {
-                    print("Error parsing postStudentLocation -- couldn't find objectID in json result")
-                    completionHandler(result: nil, error: NSError(domain: "postStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "couldn't find objectID key in result"]))
+                } else {
+                    print("Error parsing postToStudentLocation -- couldn't find objectID in json result")
+                    completionHandler(result: nil, error: NSError(domain: "postToStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "couldn't find objectID key in result"]))
                 }
             }
         }

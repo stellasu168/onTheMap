@@ -163,7 +163,11 @@
                     <navigationItem key="navigationItem" title="On The Map" id="nZA-3j-bds">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="rgA-f5-NpO"/>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="Oq6-tL-CIm"/>
+                            <barButtonItem systemItem="refresh" id="Oq6-tL-CIm">
+                                <connections>
+                                    <action selector="refreshButtonClicked:" destination="5zu-Tw-t2B" id="5cN-QA-wmG"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="Pin" id="M1L-dJ-tbn"/>
                         </rightBarButtonItems>
                     </navigationItem>

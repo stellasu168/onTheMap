@@ -96,6 +96,7 @@ class LoginScreenViewController: UIViewController {
     
     
     @IBAction func signUpButtonTouch(sender: AnyObject) {
+        
         // Open Safari when Sign Up is clicked
         let url = NSURL(string: "https://www.udacity.com/account/auth#!/signup")
         UIApplication.sharedApplication().openURL(url!)
