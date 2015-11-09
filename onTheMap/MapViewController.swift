@@ -191,7 +191,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return false
     }
  
-    // Error - click "OK" doesn't do anything
     
     func showAlert(title: String, message: String) {
   /*      dispatch_async(dispatch_get_main_queue(), {
