@@ -29,7 +29,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         
         // Set the locations on the map
-        setLocations()
+        getStudentLocations()
     }
     
     override func viewWillAppear(animated: Bool)
@@ -52,7 +52,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             if let error = error
             {
                 //make alert view show up with error from the Udacity client
-                self.showAlertController("Udacity Logout Error", message: error.localizedDescription)
+                self.showAlert("Udacity Logout Error", message: error.localizedDescription)
             }
             else
             {
@@ -77,20 +77,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 */
     
   @IBAction func refreshButtonClicked(sender: AnyObject) {
-        setLocations()
+        getStudentLocations()
         print("refresh button clicked")
     }
     
     //MARK: Map Behavior
     
-    func setLocations() {
+    func getStudentLocations() {
+        
         ParseClient.sharedInstance().getStudentLocation() { result, error in
             
             if let error = error {
                 // Make alert view show up with error from the Parse Client
-                self.showAlertController("Parse Error", message: error.localizedDescription)
+                self.showAlert("Parse Error", message: error.localizedDescription)
             } else {
-            
                 print("Successfully getting students info!")
                 ParseClient.sharedInstance().studentLocations = result!
                 self.locationsSet = true
@@ -168,12 +168,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 let urlString = annotationView.annotation!.subtitle!
                 
                 if(verifyURL(urlString)) {
-                    // Open the url if it's valid
+                    // Open the url if it is valid
                     UIApplication.sharedApplication().openURL(NSURL(string: urlString!)!)
                 }
                 else {
                     // If the url is not valid, show an alert view
-                    showAlertController("URL Lookup Failed", message: "The provided URL is not valid.")
+                    showAlert("URL Lookup Failed", message: "The URL is invalid.")
                 }
             }
         }
@@ -193,15 +193,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
  
     // Error - click "OK" doesn't do anything
     
-    func showAlertController(title: String, message: String) {
-        dispatch_async(dispatch_get_main_queue(), {
+    func showAlert(title: String, message: String) {
+  /*      dispatch_async(dispatch_get_main_queue(), {
             print("failure string from client: \(message)")
             let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
             alert.addAction(okAction)
             
             self.presentViewController(alert, animated: true, completion: nil)
-        })
+        })*/
+        print("failure string from client: \(message)")
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alertView.addAction(action)
+        self.presentViewController(alertView, animated: true, completion: nil)
+
+        
     }
 
     

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
+class ListViewController: UITableViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var studentLocationtableView: UITableView!
     
 
     override func viewDidLoad() {
@@ -19,10 +19,11 @@ class ListViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+/*   @IBAction func refreshButtonClicked(sender: AnyObject) {
     }
     
-
+    @IBAction func logoutClicked(sender: AnyObject) {
+    }
+*/
+    
 }
