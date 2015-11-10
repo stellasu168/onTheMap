@@ -42,15 +42,19 @@ class ListViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("studentCell", forIndexPath: indexPath)
+        // Casting to custom cell
+        let cell = tableView.dequeueReusableCellWithIdentifier("studentCell", forIndexPath: indexPath) as! StudentTableViewCell
+        
         let student = ParseClient.sharedInstance().studentLocations[indexPath.row]
         
-        cell.textLabel!.text = "\(student.firstName) \(student.lastName)"
+        cell.studentLabel!.text = "\(student.firstName) \(student.lastName)"
+        cell.pinImage!.contentMode = UIViewContentMode.ScaleAspectFit
         
-        // display the pins (somehow)
         return cell
     }
     
+    
+    // after user select row, it shows URL but it shows something weird after that
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let student = ParseClient.sharedInstance().studentLocations[indexPath.row]
         
