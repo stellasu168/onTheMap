@@ -56,10 +56,11 @@ class ListViewController: UITableViewController {
     
     // after user select row, it shows URL but it shows something weird after that
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         let student = ParseClient.sharedInstance().studentLocations[indexPath.row]
         
         if let url = NSURL(string: student.mediaURL!) {
-            // if url != nil
+            // if (url != nil)
             if UIApplication.sharedApplication().canOpenURL(url) {
                 UIApplication.sharedApplication().openURL(url)
             }

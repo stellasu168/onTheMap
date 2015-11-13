@@ -180,7 +180,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     // MARK: Helpers
-    
+ 
     func verifyURL(urlString: String?) -> Bool {
         if let urlString = urlString {
             if let url = NSURL(string: urlString) {
