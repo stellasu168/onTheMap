@@ -15,11 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var sessionID:String? = nil
-    
-    //var username:String? = nil
+    var userKey:String? = nil
     //var password:String? = nil
-
-
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         return true

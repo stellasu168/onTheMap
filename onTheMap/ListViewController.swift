@@ -29,7 +29,7 @@ class ListViewController: UITableViewController {
     }
     
 /*    @IBAction func logoutClicked(sender: AnyObject) {
-        Udacity.sharedInstance.logout()
+        Udacity.sharedInstance.logOut()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 */

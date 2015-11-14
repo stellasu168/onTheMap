@@ -45,7 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     //MARK: Tab Bar Buttons
     
-/*    func logout(sender: AnyObject)
+/*    func logOut(sender: AnyObject)
     {
         UdacityClient.sharedInstance().logoutOfSession() { result, error in
             
@@ -190,8 +190,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         return false
     }
- 
-    
+     
     func showAlert(title: String, message: String) {
   /*      dispatch_async(dispatch_get_main_queue(), {
             print("failure string from client: \(message)")
@@ -206,9 +205,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(action)
         self.presentViewController(alertView, animated: true, completion: nil)
-
         
     }
-
     
 }
