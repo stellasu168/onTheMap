@@ -62,9 +62,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-*/
-
-/*    func addPin(sender: AnyObject) {
+*/ 
+    @IBAction func addPin(sender: AnyObject) {
     
         //Grab the information posting VC from Storyboard
         let object:AnyObject = storyboard!.instantiateViewControllerWithIdentifier("InfoPostingViewController")
@@ -74,7 +73,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //Present the view controller
         presentViewController(addPinVC, animated: true, completion: nil)
     }
-*/
+
     
   @IBAction func refreshButtonClicked(sender: AnyObject) {
         getStudentLocations()

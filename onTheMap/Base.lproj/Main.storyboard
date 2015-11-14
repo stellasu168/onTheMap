@@ -174,11 +174,16 @@
                                     <action selector="refreshButtonClicked:" destination="5zu-Tw-t2B" id="5cN-QA-wmG"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="Pin" id="M1L-dJ-tbn"/>
+                            <barButtonItem image="Pin" id="M1L-dJ-tbn">
+                                <connections>
+                                    <action selector="addPin:" destination="5zu-Tw-t2B" id="iWh-9L-iza"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addPin" destination="M1L-dJ-tbn" id="CXf-CY-5b5"/>
                         <outlet property="mapView" destination="47w-oA-0OM" id="fRA-Ey-zzL"/>
                         <outlet property="refreshButton" destination="Oq6-tL-CIm" id="dVm-ba-aC2"/>
                     </connections>
@@ -190,7 +195,7 @@
         <!--Info posting view-->
         <scene sceneID="bGV-O6-KpG">
             <objects>
-                <viewController storyboardIdentifier="InfoPostingViewController" title="Info posting view" id="vnB-zt-MtL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InfoPostingViewController" title="Info posting view" id="vnB-zt-MtL" customClass="InfoPostingViewController" customModule="onTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UTQ-43-g6M"/>
                         <viewControllerLayoutGuide type="bottom" id="tlY-Xa-lpf"/>
@@ -198,6 +203,27 @@
                     <view key="view" contentMode="scaleToFill" id="yAj-RS-scJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgZ-nn-b5o">
+                                <rect key="frame" x="0.0" y="20" width="320" height="122"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter your location ..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WIB-MP-BJx">
+                                <rect key="frame" x="26" y="150" width="267" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBU-TP-QEt">
+                                <rect key="frame" x="52" y="504" width="213" height="37"/>
+                                <state key="normal" title="Find on the Map"/>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vrp-uu-vQF">
+                                <rect key="frame" x="0.0" y="178" width="320" height="327"/>
+                                <color key="backgroundColor" red="0.23704636381512284" green="0.29972227841493376" blue="0.48814619348404253" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>

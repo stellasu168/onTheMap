@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550716D71BF7EEEA00D93453 /* InfoPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550716D61BF7EEEA00D93453 /* InfoPostingViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		55326E201BE9721D00DC6348 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55326E1F1BE9721D00DC6348 /* MapKit.framework */; };
 		554BFA811BE6BBC40020E793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BFA801BE6BBC40020E793 /* AppDelegate.swift */; };
 		554BFA831BE6BBC40020E793 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BFA821BE6BBC40020E793 /* LoginScreenViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		550716D61BF7EEEA00D93453 /* InfoPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPostingViewController.swift; sourceTree = "<group>"; };
 		55326E1F1BE9721D00DC6348 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		554BFA7D1BE6BBC40020E793 /* onTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = onTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		554BFA801BE6BBC40020E793 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				554BFA821BE6BBC40020E793 /* LoginScreenViewController.swift */,
 				5588FA8A1BEC6FB00054FA76 /* MapViewController.swift */,
 				5588FA8F1BECACDB0054FA76 /* ListViewController.swift */,
+				550716D61BF7EEEA00D93453 /* InfoPostingViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550716D71BF7EEEA00D93453 /* InfoPostingViewController.swift in Sources */,
 				5588FA941BEDDA5D0054FA76 /* StudentLocation.swift in Sources */,
 				5588FA9C1BF1712E0054FA76 /* StudentTableViewCell.swift in Sources */,
 				5588FA981BEE135A0054FA76 /* ParseConvenience.swift in Sources */,
