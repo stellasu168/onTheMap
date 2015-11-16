@@ -65,13 +65,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 */ 
     @IBAction func addPin(sender: AnyObject) {
     
-        //Grab the information posting VC from Storyboard
-        let object:AnyObject = storyboard!.instantiateViewControllerWithIdentifier("InfoPostingViewController")
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController")
+        self.presentViewController(controller!, animated: true, completion: nil)
         
-        let addPinVC = object as! InfoPostingViewController
-        
-        //Present the view controller
-        presentViewController(addPinVC, animated: true, completion: nil)
     }
 
     

@@ -183,7 +183,6 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addPin" destination="M1L-dJ-tbn" id="CXf-CY-5b5"/>
                         <outlet property="mapView" destination="47w-oA-0OM" id="fRA-Ey-zzL"/>
                         <outlet property="refreshButton" destination="Oq6-tL-CIm" id="dVm-ba-aC2"/>
                     </connections>
