@@ -50,10 +50,10 @@ class UdacityClient: NSObject {
         let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-                print(parsedResult) // *** Delete this later
+                // *** Delete this later
+                print(parsedResult)
                 guard let session = parsedResult["session"] as? [String: String] else {
                     print("Failed to get session from Udacity")
-                    
                     if let errorMessage = parsedResult["error"] as? String {
                         dispatch_async(dispatch_get_main_queue(), {
                             completion(user: nil, errorMessage: errorMessage)
@@ -62,19 +62,6 @@ class UdacityClient: NSObject {
                     
                     return
                 }
-                
-         /*
-                /* 5. Parse the data */
-                let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-                let parsedResult: AnyObject!
-                do {
-                    parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-                } catch {
-                    parsedResult = nil
-                    print("Could not parse the data as JSON: '\(data)'")
-                    return
-                }
-        */
                 
             /* GUARD: Is the "sessionID" key in parsedResult? */
             guard let sessionID = session["id"] else {
@@ -142,7 +129,11 @@ class UdacityClient: NSObject {
         task.resume()
     }
     
-    func logOut() {
+    //MARK: - DELETE
+    
+    // Deleteing (logging out of)a session
+    
+    func logoutSession() {
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
         request.HTTPMethod = "DELETE"
         var xsrfCookie: NSHTTPCookie? = nil
@@ -153,16 +144,23 @@ class UdacityClient: NSObject {
         if let xsrfCookie = xsrfCookie {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
+        
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil {
+            if error != nil { // Handle error
                 print("Failed to delete session: \(error!.localizedDescription)")
+                // Do something to show alert to users
+                // Reset app delegate data
                 return
             }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) // Subset response data!
             print(NSString(data: newData, encoding: NSUTF8StringEncoding))
         }
         task.resume()
+        // *** Action needed: clear out the login screen
+        
+        
+        
     }
     
 }

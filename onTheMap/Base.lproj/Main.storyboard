@@ -109,10 +109,22 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="On The Map" id="bbl-9p-Pvp">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="3UZ-In-BDC"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="3UZ-In-BDC">
+                            <connections>
+                                <action selector="logoutClicked:" destination="L52-FJ-Xor" id="B9P-MJ-sS8"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="hHB-fg-VEx"/>
-                            <barButtonItem image="Pin" id="TH6-P4-anZ"/>
+                            <barButtonItem systemItem="refresh" id="hHB-fg-VEx">
+                                <connections>
+                                    <action selector="refreshButtonClicked:" destination="L52-FJ-Xor" id="IM8-JD-oXk"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="Pin" id="TH6-P4-anZ">
+                                <connections>
+                                    <action selector="addPin:" destination="L52-FJ-Xor" id="pNP-jU-GrF"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -167,7 +179,11 @@
                     <tabBarItem key="tabBarItem" title="Item 1" id="s7c-8F-lU5"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="nZA-3j-bds">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="rgA-f5-NpO"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="rgA-f5-NpO">
+                            <connections>
+                                <action selector="logoutClicked:" destination="5zu-Tw-t2B" id="fcf-cV-9aR"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="Oq6-tL-CIm">
                                 <connections>

@@ -44,25 +44,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     //MARK: Tab Bar Buttons
-    
-/*    func logOut(sender: AnyObject)
-    {
-        UdacityClient.sharedInstance().logoutOfSession() { result, error in
-            
-            if let error = error
-            {
-                //make alert view show up with error from the Udacity client
-                self.showAlert("Udacity Logout Error", message: error.localizedDescription)
-            }
-            else
-            {
-                print("Successfully logged out of Udacity session")
-                
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
+    // ** Error handling is done throught the logoutSession method
+    @IBAction func logoutClicked(sender: AnyObject) {
+        UdacityClient.sharedInstance.logoutSession()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
-*/ 
+
+    
     @IBAction func addPin(sender: AnyObject) {
     
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController")

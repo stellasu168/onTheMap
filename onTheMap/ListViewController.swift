@@ -12,7 +12,6 @@ class ListViewController: UITableViewController {
 
     @IBOutlet var studentLocationtableView: UITableView!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -28,11 +27,19 @@ class ListViewController: UITableViewController {
         getStudentData()
     }
     
-/*    @IBAction func logoutClicked(sender: AnyObject) {
-        Udacity.sharedInstance.logOut()
+    @IBAction func logoutClicked(sender: AnyObject) {
+        UdacityClient.sharedInstance.logoutSession()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-*/
+
+    
+    @IBAction func addPin(sender: AnyObject) {
+        
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController")
+        self.presentViewController(controller!, animated: true, completion: nil)
+        
+    }
+
     
     //MARK: UITableView data source
     
