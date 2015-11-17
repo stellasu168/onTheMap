@@ -72,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1790" y="-110"/>
+            <point key="canvasLocation" x="-2364" y="-10"/>
         </scene>
         <!--List View-->
         <scene sceneID="kYh-Xm-Zll">
@@ -133,7 +133,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZL-CB-dLX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-538" y="306"/>
+            <point key="canvasLocation" x="-1114" y="404"/>
         </scene>
         <!--Map Nav Controller-->
         <scene sceneID="Upi-p5-v3W">
@@ -150,7 +150,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EeD-98-NTT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-951" y="-337"/>
+            <point key="canvasLocation" x="-1531" y="-375"/>
         </scene>
         <!--Map View-->
         <scene sceneID="ugG-WM-3jt">
@@ -205,7 +205,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPH-Mu-t9Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-538" y="-337"/>
+            <point key="canvasLocation" x="-1114" y="-383"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QNi-C2-0Bj">
+            <objects>
+                <navigationController id="1pI-2B-SwR" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XU3-er-oO8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vnB-zt-MtL" kind="relationship" relationship="rootViewController" id="tty-F5-S9k"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0x8-zh-4Rh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-749" y="-383"/>
         </scene>
         <!--Info posting view-->
         <scene sceneID="bGV-O6-KpG">
@@ -219,32 +235,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgZ-nn-b5o">
-                                <rect key="frame" x="0.0" y="20" width="320" height="122"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter your location ..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WIB-MP-BJx">
-                                <rect key="frame" x="26" y="150" width="267" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your location ..." textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WIB-MP-BJx">
+                                <rect key="frame" x="26" y="142" width="267" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBU-TP-QEt">
-                                <rect key="frame" x="52" y="504" width="213" height="37"/>
+                                <rect key="frame" x="53" y="524" width="213" height="32"/>
                                 <state key="normal" title="Find on the Map"/>
+                                <connections>
+                                    <action selector="findOnTheMapClicked:" destination="vnB-zt-MtL" eventType="touchUpInside" id="OD1-zz-4lN"/>
+                                </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vrp-uu-vQF">
-                                <rect key="frame" x="0.0" y="178" width="320" height="327"/>
-                                <color key="backgroundColor" red="0.23704636381512284" green="0.29972227841493376" blue="0.48814619348404253" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cn2-o8-XW4">
+                                <rect key="frame" x="0.0" y="171" width="320" height="353"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgZ-nn-b5o">
+                                <rect key="frame" x="-1" y="64" width="320" height="78"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="VGI-UD-nX8">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="97l-tk-ehi">
+                            <connections>
+                                <action selector="cancelButtonClicked:" destination="vnB-zt-MtL" id="PvW-W4-fsi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="cn2-o8-XW4" id="5y8-mv-pEr"/>
+                        <outlet property="newLocation" destination="WIB-MP-BJx" id="Njh-kb-CxW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4re-ah-X0M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-160" y="-160"/>
+            <point key="canvasLocation" x="-749" y="300"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="xpP-Hw-rx9">
@@ -263,7 +294,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKk-OQ-tyW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1392" y="-110"/>
+            <point key="canvasLocation" x="-1973" y="-10"/>
         </scene>
         <!--List Nav Controller-->
         <scene sceneID="XQ4-X6-s2f">
@@ -280,7 +311,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xC-DB-E3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-951" y="306"/>
+            <point key="canvasLocation" x="-1525" y="398"/>
         </scene>
     </scenes>
     <resources>

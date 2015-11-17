@@ -52,16 +52,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     
     @IBAction func addPin(sender: AnyObject) {
-    
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("InfoPostingViewController")
         self.presentViewController(controller!, animated: true, completion: nil)
-        
     }
 
     
   @IBAction func refreshButtonClicked(sender: AnyObject) {
         getStudentLocations()
-        print("refresh button clicked")
     }
     
     //MARK: Map Behavior
