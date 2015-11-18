@@ -13,6 +13,20 @@ class UdacityClient: NSObject {
 
     static let sharedInstance = UdacityClient()
     
+    //authentication state
+    var sessionID: String? = nil
+    var userID: String? = nil
+    var loginError: String? = nil
+    
+    //user data
+    var firstName: String? = nil
+    var lastName: String? = nil
+    var latitude: Double? = nil
+    var longitude: Double? = nil
+    var mediaURL: String? = nil
+    var mapString: String? = nil
+
+    
     override init() {
         super.init()
     }

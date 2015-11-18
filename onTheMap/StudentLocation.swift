@@ -24,7 +24,7 @@ struct StudentLocation {
     var updatedAt = ""
     
     // Construct a StudentLocation from a dictionary
-    //init() {}
+    init() {}
     
     init(dictionary: [String : AnyObject]) {
         firstName = dictionary[ParseClient.JSONResponseKeys.FirstName] as! String

@@ -10,29 +10,34 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
 class InfoPostingViewController: UIViewController {
 
-    
+    @IBOutlet weak var askForLocation: UILabel!
     @IBOutlet weak var newLocation: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var findOnTheMapButton: UIButton!
+    @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var submitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       self.navigationController?.toolbarHidden = false
+        submitButton.hidden = true
+        urlTextField.hidden = true
         
-
-        // Do any additional setup after loading the view.
     }
 
-    
     @IBAction func findOnTheMapClicked(sender: AnyObject) {
         
         newLocation.hidden = true
-        // Forward geocode the string
+        findOnTheMapButton.hidden = true
+        askForLocation.hidden = true
         
-
+        // Show new text fileds to ask for the link
+        submitButton.hidden = false
+        urlTextField.hidden = false
+        
+        // Forward geocode the string
         let address = newLocation.text!
         let geocoder = CLGeocoder()
         
@@ -56,6 +61,48 @@ class InfoPostingViewController: UIViewController {
     
     }
 
+    // Add new Student's info to the queue
+    @IBAction func submitButtonClicked(sender: AnyObject) {
+        
+        // If URL not valid, handle error
+        // *** Do something here
+        
+        // *** maybe try to get it from the app delegate?!
+        let newStudentInfo = UdacityClient.sharedInstance
+/*
+       
+        // Save new location data
+        UdacityClient.getAuthenticatedUser(user, error) in
+        if error != nil {
+            print("error getting user: \(error)")
+            return
+            
+        }
+ */
+        
+        var newStudentLocation = StudentLocation()
+        newStudentLocation.firstName = newStudentInfo.firstName!
+        print(newStudentInfo.firstName!)
+        
+        // Posting new student location to Parse
+        ParseClient.sharedInstance().postToStudentLocation(newStudentLocation, completionHandler: {
+            (success, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            // *** Do something here
+            })
+        
+        
+        
+        
+        // Going back to the map and table tabbed view
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("mapViewVC") as! UITabBarController
+        self.presentViewController(controller, animated: true, completion: nil)
+
+        
+    }
   
     @IBAction func cancelButtonClicked(sender: AnyObject) {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("mapViewVC") as! UITabBarController
