@@ -20,6 +20,9 @@ class InfoPostingViewController: UIViewController {
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
+    var newLongitude: Double? = nil
+    var newLatitude: Double? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         submitButton.hidden = true
@@ -44,19 +47,27 @@ class InfoPostingViewController: UIViewController {
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if((error) != nil){
                 // If it fails, display an alert view
-                print("**Error**", error)
+                print("Geocoder Error", error)
                 
             }
             if let placemark = placemarks?.first {
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                let longitude = CLLocationDegrees(coordinates.longitude)
+                let latitude = CLLocationDegrees(coordinates.latitude)
                 
+                self.newLongitude = longitude
+                self.newLatitude = latitude
+                
+                UdacityClient.sharedInstance.latitude = latitude
+                UdacityClient.sharedInstance.longitude = longitude
+
                 // Construct an anotation
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinates
                 self.mapView.addAnnotation(annotation)
                 
             }
-
+   
         })
     
     }
@@ -64,25 +75,22 @@ class InfoPostingViewController: UIViewController {
     // Add new Student's info to the queue
     @IBAction func submitButtonClicked(sender: AnyObject) {
         
-        // If URL not valid, handle error
+        // If URL is not valid, handle error
         // *** Do something here
         
-        // *** maybe try to get it from the app delegate?!
-        let newStudentInfo = UdacityClient.sharedInstance
-/*
-       
-        // Save new location data
-        UdacityClient.getAuthenticatedUser(user, error) in
-        if error != nil {
-            print("error getting user: \(error)")
-            return
-            
-        }
- */
         
+        
+        
+        // Save new location data
         var newStudentLocation = StudentLocation()
-        newStudentLocation.firstName = newStudentInfo.firstName!
-        print(newStudentInfo.firstName!)
+        newStudentLocation.firstName = UdacityClient.sharedInstance.firstName!
+        newStudentLocation.lastName = UdacityClient.sharedInstance.lastName!
+        newStudentLocation.uniqueKey = UdacityClient.sharedInstance.userID!
+        newStudentLocation.mapString = newLocation.text!
+        newStudentLocation.mediaURL = urlTextField.text!
+        newStudentLocation.longitude = newLongitude
+        newStudentLocation.latitude = newLatitude
+
         
         // Posting new student location to Parse
         ParseClient.sharedInstance().postToStudentLocation(newStudentLocation, completionHandler: {
@@ -91,11 +99,10 @@ class InfoPostingViewController: UIViewController {
                 print(error)
                 return
             }
-            // *** Do something here
+            // *** Do something here after successfully post new data
+            
+            
             })
-        
-        
-        
         
         // Going back to the map and table tabbed view
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("mapViewVC") as! UITabBarController

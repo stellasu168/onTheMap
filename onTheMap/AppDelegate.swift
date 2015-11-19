@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var sessionID:String? = nil
     var userKey:String? = nil
-    //var password:String? = nil
-    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

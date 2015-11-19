@@ -29,7 +29,9 @@ class ListViewController: UITableViewController {
     
     @IBAction func logoutClicked(sender: AnyObject) {
         UdacityClient.sharedInstance.logoutSession()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("loginView")
+        self.presentViewController(controller!, animated: true, completion: nil)
+
     }
 
     
@@ -70,6 +72,7 @@ class ListViewController: UITableViewController {
             // if (url != nil)
             if UIApplication.sharedApplication().canOpenURL(url) {
                 UIApplication.sharedApplication().openURL(url)
+                print(url)
             }
         }
     }

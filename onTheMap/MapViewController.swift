@@ -47,7 +47,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // ** Error handling is done throught the logoutSession method
     @IBAction func logoutClicked(sender: AnyObject) {
         UdacityClient.sharedInstance.logoutSession()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("loginView")
+        self.presentViewController(controller!, animated: true, completion: nil)
+        
+
     }
 
     

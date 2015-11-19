@@ -40,10 +40,8 @@ class LoginScreenViewController: UIViewController {
                 return
             }
             
-            print("Could not log in at this time")
         })
         
-               
         
         // If all looks good, it will segue to Map and Table Tabbed View
         completeLogin()

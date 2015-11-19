@@ -13,12 +13,10 @@ class UdacityClient: NSObject {
 
     static let sharedInstance = UdacityClient()
     
-    //authentication state
     var sessionID: String? = nil
     var userID: String? = nil
-    var loginError: String? = nil
+    //var loginError: String? = nil
     
-    //user data
     var firstName: String? = nil
     var lastName: String? = nil
     var latitude: Double? = nil
@@ -45,7 +43,6 @@ class UdacityClient: NSObject {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        //request.HTTPBody = "{\"udacity\": {\"username\": \"\(emailTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
         request.HTTPBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
         
         let session = NSURLSession.sharedSession()
@@ -65,7 +62,8 @@ class UdacityClient: NSObject {
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
                 // *** Delete this later
-                print(parsedResult)
+                //print(parsedResult)
+                
                 guard let session = parsedResult["session"] as? [String: String] else {
                     print("Failed to get session from Udacity")
                     if let errorMessage = parsedResult["error"] as? String {
@@ -91,7 +89,12 @@ class UdacityClient: NSObject {
                         completion(user: nil, errorMessage: "Could not find user")
                         return
                     }
-                    completion(user: jsonResult, errorMessage: nil)
+                
+                completion(user: jsonResult, errorMessage: nil)
+                
+                // Calling getAuthenticatedUser
+                self.getAuthenticatedUser(completion)
+
                 })
             } catch {
                 parsedResult = nil
@@ -107,9 +110,13 @@ class UdacityClient: NSObject {
     }
     
     func getAuthenticatedUser(completion: (user: [String: AnyObject]?, error: String?) -> Void) {
+        
+        print("getAuthenticatedUser was called")
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         guard let userId = appDelegate.userKey else {return}
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/\(userId)")!)
+        self.userID = userId
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
@@ -118,7 +125,6 @@ class UdacityClient: NSObject {
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
             let parsedResult: AnyObject!
-            
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
                 if let responseCode = parsedResult["status"] as? Int {
@@ -128,17 +134,33 @@ class UdacityClient: NSObject {
                     }
                     return
                 }
+        
+                
+                if let user = parsedResult["user"] as? [String: AnyObject] {
+                    if let first_name = user["first_name"] as? String {
+                        self.firstName = first_name
+                        
+                    }
+                    if let last_name = user["last_name"] as? String {
+                        self.lastName = last_name
+                    }
+   
+                    
+                }
                 
                 guard let user = parsedResult["user"] as? [String: AnyObject] else {
                     print("Failed to cast user as Dictionary<String, AnyObject>")
                     return
                 }
+                
+                
                 completion(user: user, error: nil)
             } catch {
                 completion(user: nil, error: "Error obtaining data")
             }
             
         }
+        
         
         task.resume()
     }
@@ -164,15 +186,17 @@ class UdacityClient: NSObject {
             if error != nil { // Handle error
                 print("Failed to delete session: \(error!.localizedDescription)")
                 // Do something to show alert to users
-                // Reset app delegate data
+                
                 return
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) // Subset response data!
             print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+           
+
         }
         task.resume()
         // *** Action needed: clear out the login screen
-        
+        // *** Reset app delegate data
         
         
     }
