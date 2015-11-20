@@ -46,7 +46,7 @@ class InfoPostingViewController: UIViewController {
         
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if((error) != nil){
-                // If it fails, display an alert view
+                // *** If it fails, display an alert view
                 print("Geocoder Error", error)
                 
             }
@@ -65,6 +65,9 @@ class InfoPostingViewController: UIViewController {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinates
                 self.mapView.addAnnotation(annotation)
+                
+                // Zooms placemark
+                self.mapView.region = MKCoordinateRegionMake(coordinates, MKCoordinateSpanMake(0.2, 0.2))
                 
             }
    
