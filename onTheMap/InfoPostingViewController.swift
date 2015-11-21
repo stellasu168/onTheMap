@@ -19,6 +19,7 @@ class InfoPostingViewController: UIViewController {
     @IBOutlet weak var findOnTheMapButton: UIButton!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var newLongitude: Double? = nil
     var newLatitude: Double? = nil
@@ -27,6 +28,7 @@ class InfoPostingViewController: UIViewController {
         super.viewDidLoad()
         submitButton.hidden = true
         urlTextField.hidden = true
+        activityIndicator.hidden = true
         
     }
 
@@ -35,10 +37,14 @@ class InfoPostingViewController: UIViewController {
         newLocation.hidden = true
         findOnTheMapButton.hidden = true
         askForLocation.hidden = true
+        activityIndicator.hidden = false
         
         // Show new text fileds to ask for the link
         submitButton.hidden = false
         urlTextField.hidden = false
+        
+        // Start the activity indicator
+        activityIndicator.startAnimating()
         
         // Forward geocode the string
         let address = newLocation.text!
@@ -66,8 +72,18 @@ class InfoPostingViewController: UIViewController {
                 annotation.coordinate = coordinates
                 self.mapView.addAnnotation(annotation)
                 
+                
                 // Zooms placemark
                 self.mapView.region = MKCoordinateRegionMake(coordinates, MKCoordinateSpanMake(0.2, 0.2))
+                
+                // Delay activity indicator so the user can see it
+                let delay = 0.5 * Double(NSEC_PER_SEC)
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(time, dispatch_get_main_queue()) {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
+                }
+
                 
             }
    

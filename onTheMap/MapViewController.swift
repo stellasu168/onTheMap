@@ -14,9 +14,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var locationsSet = false
-    let emptyURLSubtitleText = "Student has not entered a URL"
+    let emptyURLSubtitleText = "Student has not entered an URL"
     
     //MARK: Lifecycle
     
@@ -26,10 +27,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // Set the map view delegate
         mapView.delegate = self
-
         
         // Set the locations on the map
         getStudentLocations()
+        
+        activityIndicator.hidden = true
+
     }
     
     override func viewWillAppear(animated: Bool)
@@ -119,8 +122,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 annotations.append(annotation)
             }
             
+            // Start the activity indicator
+            self.activityIndicator.hidden = false
+            self.activityIndicator.startAnimating()
+
+
             // Add the annotations to the map veiw
             self.mapView.addAnnotations(annotations)
+            
+            // Delay activity indicator so the user can see it
+            let delay = 0.5 * Double(NSEC_PER_SEC)
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue()) {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
+            }
+
         })
     }
     

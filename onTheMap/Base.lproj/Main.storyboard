@@ -173,6 +173,9 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="47w-oA-0OM">
                                 <rect key="frame" x="0.0" y="44" width="320" height="480"/>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="m54-i8-wdq">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -199,6 +202,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="m54-i8-wdq" id="uDs-6i-fjI"/>
                         <outlet property="mapView" destination="47w-oA-0OM" id="fRA-Ey-zzL"/>
                         <outlet property="refreshButton" destination="Oq6-tL-CIm" id="dVm-ba-aC2"/>
                     </connections>
@@ -264,12 +268,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Q5y-du-fKc">
+                                <rect key="frame" x="149" y="329" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Q5y-du-fKc" id="tgf-Yk-b9f"/>
                         <outlet property="askForLocation" destination="cgZ-nn-b5o" id="Ytm-Hb-vGw"/>
                         <outlet property="cancelButton" destination="Suz-vb-lZd" id="1xW-4g-Zre"/>
                         <outlet property="findOnTheMapButton" destination="aBU-TP-QEt" id="36a-SH-EhN"/>
