@@ -49,7 +49,6 @@ class LoginScreenViewController: UIViewController {
             
         })
         
-        
         // If all looks good, it will segue to Map and Table Tabbed View
         completeLogin()
     }
@@ -61,8 +60,7 @@ class LoginScreenViewController: UIViewController {
 
     }
     
-    func alert(message: String)
-    {
+    func alert(message: String) {
         
         let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         

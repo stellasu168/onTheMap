@@ -94,6 +94,14 @@ class InfoPostingViewController: UIViewController {
     // Add new Student's info to the queue
     @IBAction func submitButtonClicked(sender: AnyObject) {
         
+        // Check if URL is empty
+        if (urlTextField.text == "") {
+            
+            alert("Link cannot be empty")
+            return
+        }
+
+        
         // If URL is not valid, handle error
         // *** Do something here
         
@@ -127,6 +135,18 @@ class InfoPostingViewController: UIViewController {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("mapViewVC") as! UITabBarController
         self.presentViewController(controller, animated: true, completion: nil)
 
+        
+    }
+    
+    func alert(message: String) {
+        
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        
+        // show the alert
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
   

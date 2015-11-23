@@ -75,7 +75,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             if let error = error {
                 // Make alert view show up with error from the Parse Client
-                self.showAlert("Parse Error", message: error.localizedDescription)
+                //self.showAlert("Parse Error", message: error.localizedDescription)
+                self.alert("Parse Error - \(error.description)")
             } else {
                 print("Successfully getting students info!")
                 ParseClient.sharedInstance().studentLocations = result!
@@ -173,7 +174,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
                 else {
                     // If the url is not valid, show an alert view
-                    showAlert("URL Lookup Failed", message: "The URL is invalid.")
+                    alert("URL is invalid")
                 }
             }
         }
@@ -191,23 +192,40 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return false
     }
      
-    func showAlert(title: String, message: String) {
-  /*      dispatch_async(dispatch_get_main_queue(), {
+  /*  func showAlert(title: String, message: String) {
+        dispatch_async(dispatch_get_main_queue(), {
             print("failure string from client: \(message)")
             let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
             alert.addAction(okAction)
             
             self.presentViewController(alert, animated: true, completion: nil)
-        })*/
+        })
         print("failure string from client: \(message)")
         let alertView = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alertView.addAction(action)
         self.presentViewController(alertView, animated: true, completion: nil)
         
+    } */
+    
+    func alert(message: String) {
         
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        
+        // show the alert
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
+
+
+
     
 }
+
+
+
+

@@ -195,6 +195,7 @@ class UdacityClient: NSObject {
 
         }
         task.resume()
+        
         // *** Action needed: clear out the login screen
         // *** Reset app delegate data
         
