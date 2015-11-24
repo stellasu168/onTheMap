@@ -58,14 +58,14 @@ class UdacityClient: NSObject {
             
         /* 5. Parse the data */
         let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            
         let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-                // *** Delete this later
-                //print(parsedResult)
                 
                 guard let session = parsedResult["session"] as? [String: String] else {
-                    print("Failed to get session from Udacity")
+                    print("Login Failed - can't get session from Udacity")
+                    
                     if let errorMessage = parsedResult["error"] as? String {
                         dispatch_async(dispatch_get_main_queue(), {
                             completion(user: nil, errorMessage: errorMessage)
@@ -196,10 +196,9 @@ class UdacityClient: NSObject {
         }
         task.resume()
         
-        // *** Action needed: clear out the login screen
         // *** Reset app delegate data
         
-        
     }
+    
     
 }

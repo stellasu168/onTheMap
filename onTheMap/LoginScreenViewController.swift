@@ -27,16 +27,17 @@ class LoginScreenViewController: UIViewController {
         
         if (emailTextField.text == "" || passwordTextField.text == ""){
             
-            alert("Wrong username or password")
+            alert("Wrong email or password")
             return
         }
         
         UdacityClient.sharedInstance.loginWithInput(emailTextField.text!, password: passwordTextField.text!, completion: {
             (user, error) in
             if error != nil {
-                print("login error")
+                self.alert("Failure to connect to the network")
                 return
             }
+            
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
             guard let user = user else {return}

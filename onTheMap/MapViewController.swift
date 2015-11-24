@@ -63,7 +63,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     
-  @IBAction func refreshButtonClicked(sender: AnyObject) {
+    @IBAction func refreshButtonClicked(sender: AnyObject) {
         getStudentLocations()
     }
     
@@ -74,9 +74,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         ParseClient.sharedInstance().getStudentLocation() { result, error in
             
             if let error = error {
-                // Make alert view show up with error from the Parse Client
-                //self.showAlert("Parse Error", message: error.localizedDescription)
-                self.alert("Parse Error - \(error.description)")
+                // Displays an alert if the download fails
+                self.alert("Downloading student info fails - \(error.description)")
             } else {
                 print("Successfully getting students info!")
                 ParseClient.sharedInstance().studentLocations = result!
@@ -86,15 +85,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // Showing a pin for each student on the map view
     func setPinsOnMap() {
         dispatch_async(dispatch_get_main_queue(), {
             
-            // First remove annootations currently showing on the map view
+            // First remove annotation currently showing on the map view
             self.mapView.removeAnnotations(self.mapView.annotations)
             
             var annotations = [MKPointAnnotation]()
             
-            // Get the needed data for every student
+            // Get data for every student
             for student in ParseClient.sharedInstance().studentLocations
             {
                 let firstName = student.firstName
@@ -128,7 +128,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             self.activityIndicator.startAnimating()
 
 
-            // Add the annotations to the map veiw
+            // Add the annotation to the map veiw
             self.mapView.addAnnotations(annotations)
             
             // Delay activity indicator so the user can see it
@@ -162,6 +162,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
+  
     func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         if(annotationView.annotation!.subtitle! != emptyURLSubtitleText) {
@@ -169,7 +170,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 let urlString = annotationView.annotation!.subtitle!
                 
                 if(verifyURL(urlString)) {
-                    // Open the url if it is valid
+                    // Open student's link to their default browser if it is valid
                     UIApplication.sharedApplication().openURL(NSURL(string: urlString!)!)
                 }
                 else {
@@ -183,44 +184,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // MARK: Helpers
  
     func verifyURL(urlString: String?) -> Bool {
-        if let urlString = urlString {
-            if let url = NSURL(string: urlString) {
-                return UIApplication.sharedApplication().canOpenURL(url)
-            }
+        
+        if let url = NSURL(string: urlString!) {
+            return UIApplication.sharedApplication().canOpenURL(url)
+        } else {
+            return false
         }
-        
-        return false
     }
-     
-  /*  func showAlert(title: String, message: String) {
-        dispatch_async(dispatch_get_main_queue(), {
-            print("failure string from client: \(message)")
-            let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            let okAction: UIAlertAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
-            alert.addAction(okAction)
-            
-            self.presentViewController(alert, animated: true, completion: nil)
-        })
-        print("failure string from client: \(message)")
-        let alertView = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alertView.addAction(action)
-        self.presentViewController(alertView, animated: true, completion: nil)
-        
-    } */
     
     func alert(message: String) {
         
         let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
-        // add an action (button)
+        // Add an action (button)
         alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
         
-        // show the alert
+        // Show the alert
         self.presentViewController(alert, animated: true, completion: nil)
-        
     }
-
 
 
     

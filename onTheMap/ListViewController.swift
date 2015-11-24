@@ -63,16 +63,23 @@ class ListViewController: UITableViewController {
     }
     
     
-    // after user select row, it shows URL but it shows something weird after that
+    // After user selected a row, it shows URL to user's default browser
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let student = ParseClient.sharedInstance().studentLocations[indexPath.row]
+        
+        // Check if URL is empty
+        if ((student.mediaURL!) == "") {
+            self.alert("Student's link is empty")
+            return
+        }
+
         
         if let url = NSURL(string: student.mediaURL!) {
             // if (url != nil)
             if UIApplication.sharedApplication().canOpenURL(url) {
                 UIApplication.sharedApplication().openURL(url)
-                print(url)
+
             }
         }
     }
@@ -82,20 +89,28 @@ class ListViewController: UITableViewController {
     func getStudentData(){
         
         ParseClient.sharedInstance().getStudentLocation() { result, error in
-            
             if let error = error {
                 // Make alert view show up with error from the Parse Client
-                //self.showAlert("Parse Error", message: error.localizedDescription)
-                print(error)
+                self.alert("Parse Error - \(error.description)")
+                return
             } else {
-                print("Successfully getting students info in a list view!")
                 ParseClient.sharedInstance().studentLocations = result!
-                
                 // Display the data
                 self.studentLocationtableView.reloadData()
             }
         }
     }
     
+    
+    func alert(message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // Add an action (button)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+        
+        // Show the alert
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     
 }
