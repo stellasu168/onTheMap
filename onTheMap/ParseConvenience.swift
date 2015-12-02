@@ -32,8 +32,9 @@ extension ParseClient {
             
             // Send the desired value(s) to the completion handler
             if let error = error {
-                print(error)
+                print("taskForGetMethod - \(error.localizedDescription)")
                 completionHandler(result: nil, error: error)
+            
             }
             else {
                 if let results = JSONResult.valueForKey(ParseClient.JSONResponseKeys.Results) as? [[String : AnyObject]] {
@@ -69,7 +70,7 @@ extension ParseClient {
             
             // Send the desired values to the completion handler
             if let error = error {
-                print("Error from post method \(error)")
+                print("Error from postToStudentLocation \(error.localizedDescription )")
                 completionHandler(result: nil, error: error)
             } else {
                 if let objectID = JSONResult.valueForKey(ParseClient.JSONResponseKeys.ObjectID) as? String {

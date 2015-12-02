@@ -15,7 +15,6 @@ class UdacityClient: NSObject {
     
     var sessionID: String? = nil
     var userID: String? = nil
-    //var loginError: String? = nil
     
     var firstName: String? = nil
     var lastName: String? = nil
@@ -33,7 +32,6 @@ class UdacityClient: NSObject {
     
     func loginWithInput(email: String, password: String, completion: (user: Dictionary<String, AnyObject>?, errorMessage: String?) -> Void) {
         
-        
         /* 2. Build the URL */
         let urlString = "https://www.udacity.com/api/session"
         
@@ -50,6 +48,7 @@ class UdacityClient: NSObject {
         /* 4. Make the request */
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
+                print("loginWithInput - \(error!.localizedDescription)")
                 dispatch_async(dispatch_get_main_queue(), {
                     completion(user: nil, errorMessage: error!.localizedDescription)
                 })
@@ -120,6 +119,7 @@ class UdacityClient: NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
+                print("getAuthenticatedUser - \(error!.localizedDescription)")
                 completion(user: nil, error: error!.localizedDescription)
                 return
             }
@@ -184,8 +184,8 @@ class UdacityClient: NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error
-                print("Failed to delete session: \(error!.localizedDescription)")
-                // Do something to show alert to users
+                print("logoutSession - \(error!.localizedDescription)")
+                // *** Do something to show alert to users
                 
                 return
             }

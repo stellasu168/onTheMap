@@ -27,14 +27,19 @@ class LoginScreenViewController: UIViewController {
         
         if (emailTextField.text == "" || passwordTextField.text == ""){
             
-            alert("Wrong email or password")
+            alert("Email or password should not be empty")
             return
         }
         
+        // *** Validate users
         UdacityClient.sharedInstance.loginWithInput(emailTextField.text!, password: passwordTextField.text!, completion: {
             (user, error) in
             if error != nil {
-                self.alert("Failure to connect to the network")
+                
+                print("Calling loginWithInput with this error \(error?.localizedUppercaseString)")
+                // *** Not showing alert
+                self.alert("\(error?.localizedUppercaseString)")
+                
                 return
             }
             
@@ -63,6 +68,7 @@ class LoginScreenViewController: UIViewController {
     
     func alert(message: String) {
         
+        
         let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
         // add an action (button)
@@ -70,6 +76,7 @@ class LoginScreenViewController: UIViewController {
         
         // show the alert
         self.presentViewController(alert, animated: true, completion: nil)
+        print("alert method called --\(message)")
         
     }
     

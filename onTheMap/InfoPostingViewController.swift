@@ -32,6 +32,8 @@ class InfoPostingViewController: UIViewController {
         
     }
 
+    // *** Need to hide keyboard to show 'Submit' button
+    
     // MARK: Actions
     
     @IBAction func findOnTheMapClicked(sender: AnyObject) {
@@ -55,7 +57,9 @@ class InfoPostingViewController: UIViewController {
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if(error != nil) {
                 // If geocoding fails, display an alert view
-                self.alert("Geocoding Error - \(error?.description)")
+                // *** App crashes when there is no internet
+                self.alert("Geocoding Error - \(error?.localizedDescription)")
+                print("Geocoding - \(error?.localizedDescription)")
                 
             }
             if let placemark = placemarks?.first {
@@ -109,7 +113,10 @@ class InfoPostingViewController: UIViewController {
         
         /* Save new studnet location data --
         Encodes the data in JSON and posts to the RESTful service */
+    
         var newStudentLocation = StudentLocation()
+        
+        
         newStudentLocation.firstName = UdacityClient.sharedInstance.firstName!
         newStudentLocation.lastName = UdacityClient.sharedInstance.lastName!
         newStudentLocation.uniqueKey = UdacityClient.sharedInstance.userID!
@@ -123,7 +130,8 @@ class InfoPostingViewController: UIViewController {
         ParseClient.sharedInstance().postToStudentLocation(newStudentLocation, completionHandler: {
             (success, error) in
             if error != nil {
-                self.alert("Post fails - \(error?.description)")
+                // *** App crashes when there is no internet
+                self.alert("Post fails - \(error?.localizedDescription)")
                 return
             }
             

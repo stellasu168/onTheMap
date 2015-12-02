@@ -75,6 +75,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             if let error = error {
                 // Displays an alert if the download fails
+                // *** App crashes when there is no internet
                 self.alert("Downloading student info fails - \(error.description)")
             } else {
                 print("Successfully getting students info!")

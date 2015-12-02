@@ -36,11 +36,10 @@ class ParseClient: NSObject {
         
         // Make the request
         let task = session.dataTaskWithRequest(request) { data, response, downloadError in
-            
             // Parse and use the data (happens in completion handler)
             if let error = downloadError{
-                let newError = ParseClient.errorForData(data, response: response, error: error)
-                completionHandler(result: nil, error: newError)
+                print("taskForGetMethod - \(error.localizedDescription)")
+                
             }
             else {
                 ParseClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
@@ -71,7 +70,7 @@ class ParseClient: NSObject {
             request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(jsonBody, options: [])
         } catch let error as NSError {
             jsonifyError = error
-            print(jsonifyError)
+            print("taskForPostMethod - \(jsonifyError)")
             request.HTTPBody = nil
         }
         
@@ -81,6 +80,7 @@ class ParseClient: NSObject {
             // Parse and use the data
             if let error = downloadError {
                 let newError = ParseClient.errorForData(data, response: response, error: error)
+                print("taskForPostMethod - \(newError)")
                 completionHandler(result: nil, error: newError)
             } else {
                 ParseClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
@@ -92,7 +92,7 @@ class ParseClient: NSObject {
         
         return task
     }
-    
+/*
     // MARK: PUT
     func taskForPutMethod(method: String, jsonBody: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
@@ -115,6 +115,7 @@ class ParseClient: NSObject {
             request.HTTPBody = nil
         }
         
+
         // Make the request
         let task = session.dataTaskWithRequest(request) { data, response, downloadError in
             
@@ -122,6 +123,8 @@ class ParseClient: NSObject {
             if let error = downloadError {
                 let newError = ParseClient.errorForData(data, response: response, error: error)
                 completionHandler(result: nil, error: newError)
+                print("taskForPutMethod - \(error.localizedDescription)")
+                
             }
             else {
                 ParseClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
@@ -134,11 +137,20 @@ class ParseClient: NSObject {
         return task
     }
     
+*/
     // MARK: Helpers
     
     // Helper: Given a response with error, see if a status_message is returned, otherwise return the previous error
     class func errorForData(data: NSData?, response: NSURLResponse?, error: NSError?) -> NSError {
      
+/*        if data == nil {
+            
+            print("errorForData - \(error?.localizedDescription)")
+            return error!
+            
+        }
+*/
+        
         if let parsedResult = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as? [String : AnyObject] {
             if let errorMessage = parsedResult[ParseClient.JSONResponseKeys.StatusMessage] as? String {
              
@@ -171,10 +183,10 @@ class ParseClient: NSObject {
             completionHandler(result: nil, error: error)
         }
         else {
-            if let errorMessage = parsedResult?.valueForKey(ParseClient.JSONResponseKeys.StatusMessage) as? String {
+            if let _ = parsedResult?.valueForKey(ParseClient.JSONResponseKeys.StatusMessage) as? String {
                 let newError = errorForData(data, response: nil, error: nil)
                 completionHandler(result: nil, error: newError)
-                print(errorMessage)
+                print(newError)
             }
             else {
                 completionHandler(result: parsedResult, error: nil)
@@ -203,5 +215,8 @@ class ParseClient: NSObject {
         return Singleton.sharedInstance
     }
 
+    
+    
+    
 }
 
