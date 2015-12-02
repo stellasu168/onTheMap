@@ -73,10 +73,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         ParseClient.sharedInstance().getStudentLocation() { result, error in
             
-            if let error = error {
+            if error != nil {
                 // Displays an alert if the download fails
-                // *** App crashes when there is no internet
-                self.alert("Downloading student info fails - \(error.description)")
+                self.alert("\(error!.localizedDescription)")
             } else {
                 print("Successfully getting students info!")
                 ParseClient.sharedInstance().studentLocations = result!
@@ -194,16 +193,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func alert(message: String) {
-        
-        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        // Add an action (button)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-        
-        // Show the alert
-        self.presentViewController(alert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            
+            // show the alert
+            self.presentViewController(alert, animated: true, completion: nil)
+        })
     }
-
 
     
 }

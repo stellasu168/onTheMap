@@ -23,10 +23,8 @@ class LoginScreenViewController: UIViewController {
 
     @IBAction func loginButtonTouch(sender: AnyObject) {
         
-        // If both usename and password are not empty, do this ...
-        
+        // If and/or email and password are empty, send an alert to user
         if (emailTextField.text == "" || passwordTextField.text == ""){
-            
             alert("Email or password should not be empty")
             return
         }
@@ -36,48 +34,47 @@ class LoginScreenViewController: UIViewController {
             (user, error) in
             if error != nil {
                 
-                print("Calling loginWithInput with this error \(error?.localizedUppercaseString)")
-                // *** Not showing alert
-                self.alert("\(error?.localizedUppercaseString)")
+                self.alert("\(error!.localizedUppercaseString)")
                 
-                return
-            }
+            } else {
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
-            guard let user = user else {return}
+                guard let user = user else {return}
             
-            if let account = user["account"] as? Dictionary<String, AnyObject> {
-                appDelegate.userKey = account["key"] as? String
+                if let account = user["account"] as? Dictionary<String, AnyObject> {
+                    appDelegate.userKey = account["key"] as? String
 
-                return
+                }
+                
+                // If all looks good, it will segue to Map and Table Tabbed View
+                self.completeLogin()
             }
-            
+        
         })
         
-        // If all looks good, it will segue to Map and Table Tabbed View
-        completeLogin()
     }
     
     func completeLogin(){
         
+        dispatch_async(dispatch_get_main_queue(),{
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("mapViewVC") as! UITabBarController
         self.presentViewController(controller, animated: true, completion: nil)
+        } )
 
     }
     
     func alert(message: String) {
-        
-        
-        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-        
-        // show the alert
-        self.presentViewController(alert, animated: true, completion: nil)
-        print("alert method called --\(message)")
-        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            
+            // show the alert
+            self.presentViewController(alert, animated: true, completion: nil)
+        })
     }
     
     

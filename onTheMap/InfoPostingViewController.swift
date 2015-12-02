@@ -130,14 +130,12 @@ class InfoPostingViewController: UIViewController {
         ParseClient.sharedInstance().postToStudentLocation(newStudentLocation, completionHandler: {
             (success, error) in
             if error != nil {
-                // *** App crashes when there is no internet
-                self.alert("Post fails - \(error?.localizedDescription)")
+                self.alert("\(error!.localizedDescription)")
                 return
             }
             
-            print("Post new student info successful")
             
-            })
+        })
         
         // Going back to the map and table tabbed view
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("mapViewVC") as! UITabBarController
@@ -163,13 +161,15 @@ class InfoPostingViewController: UIViewController {
 
     
     func alert(message: String) {
-        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        // Add an action (button)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
-        
-        // Show the alert
-        self.presentViewController(alert, animated: true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), {
+            let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: nil))
+            
+            // show the alert
+            self.presentViewController(alert, animated: true, completion: nil)
+        })
     }
   
 

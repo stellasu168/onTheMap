@@ -33,18 +33,19 @@ class ParseClient: NSObject {
         
         request.addValue(Constants.ParseAppID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
-        
-        // Make the request
-        let task = session.dataTaskWithRequest(request) { data, response, downloadError in
-            // Parse and use the data (happens in completion handler)
-            if let error = downloadError{
-                print("taskForGetMethod - \(error.localizedDescription)")
-                
-            }
-            else {
+
+        /* 4. Make the request */
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil {
+                print("taskForGetMethod - \(error!.localizedDescription)")
+                // Returning error by the completionHandler
+                completionHandler(result: data, error: error)
+            } else {
                 ParseClient.parseJSONWithCompletionHandler(data!, completionHandler: completionHandler)
+                }
             }
-        }
+            
+
         // Start the request
         task.resume()
         
@@ -143,25 +144,22 @@ class ParseClient: NSObject {
     // Helper: Given a response with error, see if a status_message is returned, otherwise return the previous error
     class func errorForData(data: NSData?, response: NSURLResponse?, error: NSError?) -> NSError {
      
-/*        if data == nil {
+        if data == nil {
             
             print("errorForData - \(error?.localizedDescription)")
             return error!
             
         }
-*/
         
-        if let parsedResult = (try? NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)) as? [String : AnyObject] {
-            if let errorMessage = parsedResult[ParseClient.JSONResponseKeys.StatusMessage] as? String {
-             
-                let userInfo = [NSLocalizedDescriptionKey : errorMessage]
-                if let errorCode = parsedResult[ParseClient.JSONResponseKeys.StatusCode] as? Int {
-                    return NSError(domain: "Parse Error", code: errorCode, userInfo: userInfo)
+        do {
+                let parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                
+                if let parsedResult = parsedResult as? [String : AnyObject], errorMessage = parsedResult[ParseClient.JSONResponseKeys.StatusCode] as? String {
+                    let userInfo = [NSLocalizedDescriptionKey : errorMessage]
+                    return NSError(domain: "Parse Error", code: 1, userInfo: userInfo)
                 }
                 
-                return NSError(domain: "Parse Error", code: 1, userInfo: userInfo)
-            }
-        }
+            } catch {}
         
         return error!
     }

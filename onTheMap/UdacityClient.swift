@@ -93,18 +93,17 @@ class UdacityClient: NSObject {
                 
                 // Calling getAuthenticatedUser
                 self.getAuthenticatedUser(completion)
-
                 })
             } catch {
-                parsedResult = nil
-                print("Could not parse the data as JSON: '\(data)'")
-                return
+                    parsedResult = nil
+                    print("loginWithInput -- Could not parse the data as JSON: '\(data)'")
+                    return
+                }
+        
+        
             }
-        }
-        
-        
-        /* 7. Start the request */
-        task.resume()
+                /* 7. Start the request */
+                task.resume()
         
     }
     
