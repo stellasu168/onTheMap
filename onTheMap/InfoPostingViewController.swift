@@ -9,8 +9,10 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Foundation
 
-class InfoPostingViewController: UIViewController {
+
+class InfoPostingViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var askForLocation: UILabel!
     @IBOutlet weak var newLocation: UITextField!
@@ -29,10 +31,10 @@ class InfoPostingViewController: UIViewController {
         submitButton.hidden = true
         urlTextField.hidden = true
         activityIndicator.hidden = true
-        
+        self.newLocation.delegate = self
+        self.urlTextField.delegate = self
     }
 
-    // *** Need to hide keyboard to show 'Submit' button
     
     // MARK: Actions
     
@@ -49,6 +51,8 @@ class InfoPostingViewController: UIViewController {
         
         // Start the activity indicator
         activityIndicator.startAnimating()
+        
+        textFieldShouldReturn(urlTextField)
         
         // Forward geocode the string
         let address = newLocation.text!
@@ -173,4 +177,10 @@ class InfoPostingViewController: UIViewController {
     }
   
 
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        dispatch_async(dispatch_get_main_queue(), {
+            textField.resignFirstResponder()
+        })
+        return true
+    }
 }
