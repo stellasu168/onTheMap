@@ -40,15 +40,6 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func findOnTheMapClicked(sender: AnyObject) {
         
-        newLocation.hidden = true
-        findOnTheMapButton.hidden = true
-        askForLocation.hidden = true
-        activityIndicator.hidden = false
-        
-        // Show new text fileds to ask for the link
-        submitButton.hidden = false
-        urlTextField.hidden = false
-        
         // Start the activity indicator
         activityIndicator.startAnimating()
         
@@ -61,13 +52,20 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
         geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
             if(error != nil) {
                 // If geocoding fails, display an alert view
-                // *** App crashes when there is no internet
-                self.alert("Geocoding Error - \(error?.localizedDescription)")
-                print("Geocoding - \(error?.localizedDescription)")
+                self.alert("Geocoding Error - \(error!.localizedDescription)")
+                print("Geocoding - \(error!.localizedDescription)")
+                self.submitButton.hidden = true
+                self.urlTextField.hidden = true
+                self.activityIndicator.stopAnimating()
+            } else {
+                self.activityIndicator.hidden = false
                 
-            }
-            if let placemark = placemarks?.first {
-                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                self.newLocation.hidden = true
+                self.findOnTheMapButton.hidden = true
+                self.askForLocation.hidden = true
+                
+                let placemark = placemarks?.first
+                let coordinates:CLLocationCoordinate2D = placemark!.location!.coordinate
                 let longitude = CLLocationDegrees(coordinates.longitude)
                 let latitude = CLLocationDegrees(coordinates.latitude)
                 
@@ -82,7 +80,7 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
                 annotation.coordinate = coordinates
                 self.mapView.addAnnotation(annotation)
                 
-                
+            
                 // Zooms placemark into an appropriate region
                 self.mapView.region = MKCoordinateRegionMake(coordinates, MKCoordinateSpanMake(0.2, 0.2))
                 
@@ -92,6 +90,10 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
                 dispatch_after(time, dispatch_get_main_queue()) {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.hidesWhenStopped = true
+                    
+                // Show new text fileds to ask for the link
+                self.submitButton.hidden = false
+                self.urlTextField.hidden = false
                 }
                 
             }
@@ -119,7 +121,6 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
         Encodes the data in JSON and posts to the RESTful service */
     
         var newStudentLocation = StudentLocation()
-        
         
         newStudentLocation.firstName = UdacityClient.sharedInstance.firstName!
         newStudentLocation.lastName = UdacityClient.sharedInstance.lastName!
