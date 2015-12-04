@@ -40,6 +40,8 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func findOnTheMapClicked(sender: AnyObject) {
         
+        activityIndicator.hidden = false
+        
         // Start the activity indicator
         activityIndicator.startAnimating()
         
@@ -57,6 +59,7 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
                 self.submitButton.hidden = true
                 self.urlTextField.hidden = true
                 self.activityIndicator.stopAnimating()
+                
             } else {
                 self.activityIndicator.hidden = false
                 
@@ -134,17 +137,17 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
         // Posting new student location to Parse
         ParseClient.sharedInstance().postToStudentLocation(newStudentLocation, completionHandler: {
             (success, error) in
+           
             if error != nil {
                 self.alert("\(error!.localizedDescription)")
                 return
+            } else {
+                // Then go back to the map and table tabbed view
+                let controller = self.storyboard?.instantiateViewControllerWithIdentifier("mapViewVC") as! UITabBarController
+                self.presentViewController(controller, animated: true, completion: nil)
             }
             
-            
         })
-        
-        // Going back to the map and table tabbed view
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("mapViewVC") as! UITabBarController
-        self.presentViewController(controller, animated: true, completion: nil)
         
     }
 
