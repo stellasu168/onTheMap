@@ -302,14 +302,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please provide us your link" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m5W-pG-UV7">
-                                <rect key="frame" x="27" y="93" width="264" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Q5y-du-fKc">
-                                <rect key="frame" x="149" y="329" width="20" height="20"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBm-mo-ZVg">
                                 <rect key="frame" x="128" y="524" width="64" height="27"/>
                                 <constraints>
@@ -321,6 +313,14 @@
                                     <action selector="submitButtonClicked:" destination="vnB-zt-MtL" eventType="touchUpInside" id="UaR-qb-Qum"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please provide us your link" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m5W-pG-UV7">
+                                <rect key="frame" x="27" y="93" width="264" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Q5y-du-fKc">
+                                <rect key="frame" x="155" y="306" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -342,14 +342,14 @@
                             <constraint firstAttribute="bottomMargin" secondItem="dBm-mo-ZVg" secondAttribute="bottom" constant="17" id="YM8-v1-ecg"/>
                             <constraint firstItem="cgZ-nn-b5o" firstAttribute="leading" secondItem="yAj-RS-scJ" secondAttribute="leadingMargin" constant="-20" id="bSg-2N-cre"/>
                             <constraint firstItem="WIB-MP-BJx" firstAttribute="leading" secondItem="yAj-RS-scJ" secondAttribute="leadingMargin" constant="6" id="cja-3k-lTL"/>
-                            <constraint firstItem="tlY-Xa-lpf" firstAttribute="top" secondItem="Q5y-du-fKc" secondAttribute="bottom" constant="175" id="hEK-gy-y8q"/>
+                            <constraint firstItem="tlY-Xa-lpf" firstAttribute="top" secondItem="Q5y-du-fKc" secondAttribute="bottom" constant="198" id="hEK-gy-y8q"/>
                             <constraint firstAttribute="bottomMargin" secondItem="aBU-TP-QEt" secondAttribute="bottom" constant="12" id="hWS-D5-5w5"/>
                             <constraint firstItem="m5W-pG-UV7" firstAttribute="leading" secondItem="yAj-RS-scJ" secondAttribute="leadingMargin" constant="11" id="hcX-mS-xKr"/>
                             <constraint firstItem="aBU-TP-QEt" firstAttribute="leading" secondItem="yAj-RS-scJ" secondAttribute="leadingMargin" constant="33" id="ijH-h3-q7F"/>
-                            <constraint firstItem="Q5y-du-fKc" firstAttribute="leading" secondItem="yAj-RS-scJ" secondAttribute="leading" constant="149" id="kmt-1x-BeB"/>
+                            <constraint firstItem="Q5y-du-fKc" firstAttribute="leading" secondItem="yAj-RS-scJ" secondAttribute="leading" constant="155" id="kmt-1x-BeB"/>
                             <constraint firstItem="7Hm-mR-9oh" firstAttribute="bottom" secondItem="cgZ-nn-b5o" secondAttribute="top" id="pRm-BC-BeT"/>
                             <constraint firstItem="7Hm-mR-9oh" firstAttribute="centerX" secondItem="cgZ-nn-b5o" secondAttribute="centerX" id="pvf-VU-9rm"/>
-                            <constraint firstItem="Q5y-du-fKc" firstAttribute="centerX" secondItem="m5W-pG-UV7" secondAttribute="centerX" id="rGu-w9-sot"/>
+                            <constraint firstItem="Q5y-du-fKc" firstAttribute="centerX" secondItem="m5W-pG-UV7" secondAttribute="centerX" constant="6" id="rGu-w9-sot"/>
                             <constraint firstItem="WIB-MP-BJx" firstAttribute="top" secondItem="m5W-pG-UV7" secondAttribute="bottom" id="xTE-Wi-KHv"/>
                         </constraints>
                     </view>
