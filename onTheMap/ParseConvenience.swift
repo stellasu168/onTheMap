@@ -42,7 +42,7 @@ extension ParseClient {
                     completionHandler(result: locations, error: nil)
                 } else {
                     print("Error parsing getStudentLocation -- couldn't find results string in \(JSONResult)")
-                    completionHandler(result: nil, error: NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not parse getStudentLocation"]))
+                    completionHandler(result: nil, error: NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey : "Could not parse - \(JSONResult)"]))
                 }
             }
         }

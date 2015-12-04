@@ -112,8 +112,9 @@ class ParseClient: NSObject {
         if let error = parsingError {
             completionHandler(result: nil, error: error)
         } else {
-            if let error = parsedResult?.valueForKey(ParseClient.JSONResponseKeys.StatusMessage) as? String {
-                print("Parse error -\(error.localizedUppercaseString)")
+            if let error = parsedResult?.valueForKey(ParseClient.JSONResponseKeys.StatusMessage) as? NSError {
+                print("Parse error -\(error.localizedDescription)")
+                completionHandler(result: parsedResult, error: error)
             }
             else {
                 completionHandler(result: parsedResult, error: nil)

@@ -59,10 +59,9 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
                 self.submitButton.hidden = true
                 self.urlTextField.hidden = true
                 self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidden = true
                 
             } else {
-                self.activityIndicator.hidden = false
-                
                 self.newLocation.hidden = true
                 self.findOnTheMapButton.hidden = true
                 self.askForLocation.hidden = true
