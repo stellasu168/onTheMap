@@ -93,7 +93,6 @@ class ListViewController: UITableViewController {
                 // Make alert view show up with error from the Parse Client
                 print("getStudentData() - \(error!.localizedDescription)")
                 self.alert("\(error!.localizedDescription)")
-                //return //not sure if I need this
                 
             } else {
                 ParseClient.sharedInstance().studentLocations = result!

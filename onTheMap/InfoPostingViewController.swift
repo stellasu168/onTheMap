@@ -112,8 +112,8 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
         }
 
         // If URL is invalid, show an alert view
-        if(verifyURL(urlTextField.text!)) {
-            alert("URL is invalid")
+        if(verifyURL(urlTextField.text!) == false) {
+            alert("Your URL is invalid")
             return
         }
         
@@ -157,11 +157,11 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
     // MARK: Helpers
 
     func verifyURL(urlString: String?) -> Bool {
+            // Create NSURL instance
             if let url = NSURL(string: urlString!) {
                 return UIApplication.sharedApplication().canOpenURL(url)
-            } else {
-                return false
             }
+            return false
     }
 
     

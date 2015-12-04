@@ -47,7 +47,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     //MARK: Tab Bar Buttons
-    // ** Error handling is done throught the logoutSession method
     @IBAction func logoutClicked(sender: AnyObject) {
         UdacityClient.sharedInstance.logoutSession()
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("loginView")
@@ -175,7 +174,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
                 else {
                     // If the url is not valid, show an alert view
-                    alert("URL is invalid")
+                    alert("Student's URL is invalid")
                 }
             }
         }
@@ -183,13 +182,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: Helpers
  
+    // Reference: http://stackoverflow.com/questions/28079123/how-to-check-validity-of-url-in-swift
     func verifyURL(urlString: String?) -> Bool {
-        
-        if let url = NSURL(string: urlString!) {
+        // Check for nil
+        if let urlString = urlString     {
+            if let url = NSURL(string: urlString) {
             return UIApplication.sharedApplication().canOpenURL(url)
-        } else {
-            return false
+            }
         }
+            return false
     }
     
     func alert(message: String) {
