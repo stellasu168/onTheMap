@@ -23,7 +23,6 @@ class UdacityClient: NSObject {
     var mediaURL: String? = nil
     var mapString: String? = nil
 
-    
     override init() {
         super.init()
     }

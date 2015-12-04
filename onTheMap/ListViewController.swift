@@ -46,7 +46,7 @@ class ListViewController: UITableViewController {
     //MARK: UITableView data source
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ParseClient.sharedInstance().studentLocations.count
+        return StudentLocation.sharedInstance.studentLocations.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -54,7 +54,7 @@ class ListViewController: UITableViewController {
         // Casting to custom cell
         let cell = tableView.dequeueReusableCellWithIdentifier("studentCell", forIndexPath: indexPath) as! StudentTableViewCell
         
-        let student = ParseClient.sharedInstance().studentLocations[indexPath.row]
+        let student = StudentLocation.sharedInstance.studentLocations[indexPath.row]
         
         cell.studentLabel!.text = "\(student.firstName) \(student.lastName)"
         cell.pinImage!.contentMode = UIViewContentMode.ScaleAspectFit
@@ -66,7 +66,7 @@ class ListViewController: UITableViewController {
     // After user selected a row, it shows URL to user's default browser
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let student = ParseClient.sharedInstance().studentLocations[indexPath.row]
+        let student = StudentLocation.sharedInstance.studentLocations[indexPath.row]
         
         // Check if URL is empty
         if ((student.mediaURL!) == "") {
@@ -76,7 +76,6 @@ class ListViewController: UITableViewController {
 
         
         if let url = NSURL(string: student.mediaURL!) {
-            // if (url != nil)
             if UIApplication.sharedApplication().canOpenURL(url) {
                 UIApplication.sharedApplication().openURL(url)
 
@@ -95,7 +94,7 @@ class ListViewController: UITableViewController {
                 self.alert("\(error!.localizedDescription)")
                 
             } else {
-                ParseClient.sharedInstance().studentLocations = result!
+                StudentLocation.sharedInstance.studentLocations = result!
                 // Display the data
                 self.studentLocationtableView.reloadData()
         

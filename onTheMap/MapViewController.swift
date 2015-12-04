@@ -77,7 +77,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 self.alert("\(error!.localizedDescription)")
             } else {
                 print("Successfully getting students info!")
-                ParseClient.sharedInstance().studentLocations = result!
+                StudentLocation.sharedInstance.studentLocations = result!
                 self.locationsSet = true
                 self.setPinsOnMap()
             }
@@ -94,7 +94,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             var annotations = [MKPointAnnotation]()
             
             // Get data for every student
-            for student in ParseClient.sharedInstance().studentLocations
+            for student in StudentLocation.sharedInstance.studentLocations
             {
                 let firstName = student.firstName
                 let lastName = student.lastName

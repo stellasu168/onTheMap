@@ -125,8 +125,8 @@ class InfoPostingViewController: UIViewController, UITextFieldDelegate {
     
         var newStudentLocation = StudentLocation()
         
-        newStudentLocation.firstName = UdacityClient.sharedInstance.firstName!
-        newStudentLocation.lastName = UdacityClient.sharedInstance.lastName!
+        newStudentLocation.firstName = StudentLocation.sharedInstance.firstName
+        newStudentLocation.lastName = StudentLocation.sharedInstance.lastName
         newStudentLocation.uniqueKey = UdacityClient.sharedInstance.userID!
         newStudentLocation.mapString = newLocation.text!
         newStudentLocation.mediaURL = urlTextField.text!

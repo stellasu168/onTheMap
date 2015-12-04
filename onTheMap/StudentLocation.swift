@@ -10,8 +10,12 @@
 
 struct StudentLocation {
     
-    // MARK: Properties
+    static var sharedInstance = StudentLocation()
     
+    // Student location arrays
+    var studentLocations = [StudentLocation]()
+    
+    // MARK: Properties
     var firstName = ""
     var lastName = ""
     var latitude: Double? = nil
